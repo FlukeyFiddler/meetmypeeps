@@ -1,4 +1,4 @@
-Feature: Landing Page
+Feature: Homepage
   As a new visitor
   I want to see a working site
 
