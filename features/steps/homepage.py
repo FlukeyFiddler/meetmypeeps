@@ -16,6 +16,6 @@ def step_impl(context, text):
     h1_tag = context.browser.find_element_by_id('h1')
     context.test.assertEqual(text, h1_tag.text)
 
-@then(u'I will see a Google map showing peeps in my vicinity')
+@then(u'I will see a Google Map')
 def step_impl(context):
     raise NotImplementedError(u'STEP: Then I will see a Google map showing peeps in my vicinity')
