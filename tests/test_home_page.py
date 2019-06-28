@@ -18,4 +18,4 @@ class HomepageTest(TestCase):
         self.assertTrue(html.startswith('<html>'))
         self.assertIn('<title>Meet My Peeps', html)
         self.assertTrue(html.endswith('</html>'))
-
+        self.assertIn("<h1 id='h1'>Meet My Poops</h1>", html)
