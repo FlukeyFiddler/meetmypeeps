@@ -6,16 +6,6 @@ from meetmypeeps.views import home_page
 
 class HomepageTest(TestCase):
 
-    def test_root_resolves_to_homepage(self):
-        found = resolve('/')
-        self.assertEqual(found.func, home_page)
-
     def test_home_page_html(self):
-        request = HttpRequest()
-        response = home_page(request)
-        html = response.content.decode('utf8')
-
-        self.assertTrue(html.startswith('<html>'))
-        self.assertIn('<title>Meet My Peeps', html)
-        self.assertTrue(html.endswith('</html>'))
-        self.assertIn("<h1 id='h1'>Meet My Poops</h1>", html)
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'home.html')
