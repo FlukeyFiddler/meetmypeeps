@@ -4,5 +4,16 @@
     </head>
     <body>
         <h1 id="h1">Meet My Peeps</h1>
+        <form id="event_form" method="POST">
+            <input id="event_form_title" />
+            <input id="event_form_lat" />
+            <input id="event_form_lon" />
+            <input id="event_form_date" />
+            <input id="event_form_submit" type="submit" name="submit" />
+            {% csrf_token %}
+        </form>
+        <table id="own_events_list">
+
+        </table>
     </body>
 </html>
