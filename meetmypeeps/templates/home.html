@@ -5,15 +5,26 @@
     <body>
         <h1 id="h1">Meet My Peeps</h1>
         <form id="event_form" method="POST">
-            <input id="event_form_title" />
-            <input id="event_form_lat" />
-            <input id="event_form_lon" />
-            <input id="event_form_date" />
-            <input id="event_form_submit" type="submit" name="submit" />
+            Title: <input name="title" id="event_form_title" />
+            Lat: <input name="lat" id="event_form_lat" />
+            Lon: <input name="lon" id="event_form_lon" />
+            Date: <input name="date" id="event_form_date" />
+            <input name="submit" id="event_form_submit" type="submit" name="submit" />
             {% csrf_token %}
         </form>
         <table id="own_events_list">
-
+            <tr class="header">
+                <td>Title</td>
+                <td>Lat</td>
+                <td>Lon</td>
+                <td>Date</td>
+            </tr>
+            <tr class="row">
+                <td class="event_list_value">{{ title }}</td>
+                <td class="event_list_value">{{ lat }}</td>
+                <td class="event_list_value">{{ lon }}</td>
+                <td class="event_list_value">{{ date }}</td>
+            </tr>
         </table>
     </body>
 </html>
