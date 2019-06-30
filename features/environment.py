@@ -1,5 +1,5 @@
 from selenium import webdriver
-
+import behave
 
 def before_all(context):
     context.browser = webdriver.Chrome()
@@ -10,4 +10,5 @@ def after_all(context):
 
 
 def before_feature(context, feature):
-    pass
+    if feature.name == 'Add events':
+        context.event_form_data = []
