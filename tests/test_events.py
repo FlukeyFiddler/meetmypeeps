@@ -1,14 +1,16 @@
 from django.test import TestCase
 from meetmypeeps.models import Event
-#from django.contrib.gis.geos import Point
+from django.contrib.gis.geos import Point
+from django.utils.timezone import make_aware
+from django.utils.dateparse import parse_datetime
 
 
 class TestEvents(TestCase):
 
     def test_can_save_POST_request(self):
-        data = {'location': '52.2345504, 5.9870061',
+        data = {'loc': '52.2345504, 5.9870061',
                 'title': 'Ma Bday Bash',
-                'date': '20-07-2222'
+                'date': '2222-08-17 13:00'
                 }
         response = self.client.post('/', data=data)
         self.assertTemplateUsed(response, 'home.html')
@@ -19,14 +21,14 @@ class TestEvents(TestCase):
     def test_save_retrieve_events(self):
         first_event = Event()
         first_event.title = '1st title'
-        first_event.location = (52.2345504, 5.9870061)
-        first_event.date = '20-07-2888'
+        first_event.location = Point(52.2345504, 5.9870061)
+        first_event.date = make_aware(parse_datetime('2888-07-20 12:00'))
         first_event.save()
 
         second_event = Event()
         second_event.title = '2nd title'
-        second_event.location = (53.2435644, 4.9548342)
-        second_event.date = '20-07-2999'
+        second_event.location = Point(53.2435644, 4.9548342)
+        second_event.date = make_aware(parse_datetime('2999-08-15 17:15'))
         second_event.save()
 
         saved_items = Event.objects.all()

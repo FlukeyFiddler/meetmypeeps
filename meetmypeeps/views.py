@@ -5,7 +5,6 @@ from django.http import HttpRequest, HttpResponse
 def home_page(request):
     return render(request, 'home.html', {
         'title': request.POST.get('title', ''),
-        'lat': request.POST.get('lat', ''),
-        'lon': request.POST.get('lon', ''),
+        'loc': request.POST.get('loc', ''),
         'date': request.POST.get('date', ''),
     })
