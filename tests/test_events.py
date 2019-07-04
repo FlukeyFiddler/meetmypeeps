@@ -13,9 +13,21 @@ class TestEvents(TestCase):
                 'date': '2222-08-17 13:00'
                 }
         response = self.client.post('/', data=data)
+        self.assertEqual(Event.objects.count(), 1)
+        event = Event.objects.first()
+        self.assertEqual(data['title'], event.title)
+
+        date = make_aware(parse_datetime(data['date']))
+        self.assertEqual(date, event.date)
+
+        coords = data['loc'].split(',')
+        for coord in coords:
+            self.assertIn(float(coord), event.location.coords)
+
         self.assertTemplateUsed(response, 'home.html')
+
         html = response.content.decode()
-        for value in data.values():
+        for value in data:
             self.assertIn(value, html)
 
     def test_save_retrieve_events(self):
