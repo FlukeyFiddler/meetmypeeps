@@ -10,7 +10,8 @@ class TestEvents(TestCase):
     def test_can_save_POST_request(self):
         data = {'loc': '52.2345504, 5.9870061',
                 'title': 'Ma Bday Bash',
-                'date': '2222-08-17 13:00'
+                'date': '2222-08-17 13:00',
+                'submit': 'submit',
                 }
         response = self.client.post('/', data=data)
         self.assertEqual(Event.objects.count(), 1)
