@@ -6,7 +6,6 @@ from django.contrib.gis.geos import Point
 
 
 def home_page(request):
-    show_own_events = False
     event = Event()
     if request.method == 'POST':
         event.title = request.POST.get('title', '')
@@ -17,12 +16,5 @@ def home_page(request):
 
         return redirect('/')
 
-    return render(request, 'home.html')
-    '''
-        , {
-        'show_own_events': show_own_events,
-        'title': event.title,
-        'loc': f'{event.location.x}, {event.location.y}',
-        'date': event.date.strftime('%Y-%m-%d %H:%M'),
-    })
-    '''
+    events = Event.objects.all()
+    return render(request, 'home.html', {'events': events})
