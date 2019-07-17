@@ -8,12 +8,7 @@ from django.utils.dateparse import parse_datetime
 class TestEvents(TestCase):
 
     def test_can_save_POST_request(self):
-        data = {'loc': '52.2345504, 5.9870061',
-                'title': 'Ma Bday Bash',
-                'date': '2222-08-17 13:00',
-                'submit': 'submit',
-                }
-        response = self.client.post('/', data=data)
+        data, response = self.post_mock_data()
         self.assertEqual(Event.objects.count(), 1)
         event = Event.objects.first()
         self.assertEqual(data['title'], event.title)
@@ -25,11 +20,10 @@ class TestEvents(TestCase):
         for coord in coords:
             self.assertIn(float(coord), event.location.coords)
 
-        self.assertTemplateUsed(response, 'home.html')
-
-        html = response.content.decode()
-        for value in data:
-            self.assertIn(value, html)
+    def test_redirects_after_post(self):
+        data, response = self.post_mock_data()
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['location'], '/')
 
     def test_save_retrieve_events(self):
         first_event = Event()
@@ -57,3 +51,12 @@ class TestEvents(TestCase):
         self.assertEqual(second_saved_item.title, second_event.title)
         self.assertEqual(second_saved_item.location, second_event.location)
         self.assertEqual(second_saved_item.date, second_event.date)
+
+    def post_mock_data(self):
+        data = {'loc': '52.2345504, 5.9870061',
+                'title': 'Ma Bday Bash',
+                'date': '2222-08-17 13:00',
+                'submit': 'submit',
+                }
+        response = self.client.post('/', data=data)
+        return data, response

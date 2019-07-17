@@ -1,7 +1,7 @@
 from behave import given, when, then
 from selenium.webdriver.common.keys import Keys
 import time
-
+from selenium import webdriver
 
 def insert_into_form(context, id, text):
     field = context.event_form.find_element_by_id(id)
@@ -11,6 +11,12 @@ def insert_into_form(context, id, text):
 @then(u'I see the event form')
 def step_impl(context):
     context.event_form = context.browser.find_element_by_id('event_form')
+
+
+@then(u'I do not see a table with my events')
+def step_impl(context):
+    table = context.browser.find_elements_by_id('own_events_list')
+    context.test.assertEquals(0, len(table))
 
 
 @then(u'I enter my location "{loc}", title "{title}" and date "{date}"')
