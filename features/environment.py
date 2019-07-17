@@ -1,5 +1,5 @@
 from selenium import webdriver
-import behave
+
 
 def before_all(context):
     context.browser = webdriver.Chrome()

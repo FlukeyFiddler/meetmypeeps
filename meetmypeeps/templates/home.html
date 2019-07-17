@@ -20,8 +20,8 @@
             {% for event in events %}
             <tr class="row">
                 <td class="event_list_value">{{ event.title }}</td>
-                <td class="event_list_value">{{ event.loc }}</td>
-                <td class="event_list_value">{{ event.date }}</td>
+                <td class="event_list_value">{{ event.location.x }}, {{ event.location.y }}</td>
+                <td class="event_list_value">{{ event.date.isoformat }}</td>
             </tr>
             {% endfor %}
         </table>
