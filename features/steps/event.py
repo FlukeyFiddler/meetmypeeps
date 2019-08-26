@@ -1,7 +1,6 @@
 from behave import given, when, then
 from selenium.webdriver.common.keys import Keys
 import time
-from selenium import webdriver
 
 
 def insert_into_form(context, id, text):
